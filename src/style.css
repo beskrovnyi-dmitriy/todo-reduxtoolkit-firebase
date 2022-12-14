@@ -1,0 +1,78 @@
+body{
+    background-color: gray;
+    width: 100wh;
+    min-height: 100hv;
+    font-family: 'Courier New', Courier, monospace;
+}
+.app{
+    width: 50%;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+.addtodo{
+    background-color: white;
+    padding: 20px 20px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: left;
+    box-shadow: 3px 3px 5px black;
+}
+.inputTodo{
+    width: 70%;
+    margin-right: 30px;
+    font-size: 17px;
+    font-family: 'Courier New', Courier, monospace;
+}
+button{
+    border-radius: 20px;
+    padding: 7px;
+    box-shadow: 1px 1px 3px black;
+    background-color: rgb(209, 208, 208);
+    font-family: 'Courier New', Courier, monospace;
+    margin-right: 15px;
+}
+button:active{
+    box-shadow: 0px 0px 1px black;
+    background-color: rgb(188, 186, 186);
+}
+.todos{
+    background-color: white;
+    padding: 10px 30px;
+    border-radius: 15px;
+    box-shadow: 3px 3px 5px black;
+
+}
+.todoItem{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.textTodo{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+.textTodo input{
+    margin-right: 10px;
+    border: 0;
+}
+.editButtons{
+    display: flex;
+    column-gap: 15px;
+    align-items: baseline;
+}
+.edit, .trash{
+    width: 20px;
+}
+.accept{
+    width: 27px;
+}
+.inputEditTodo{
+    width: 80%;
+    font-family: 'Courier New', Courier, monospace;
+    margin-bottom: 5px;
+    font-size: 15px;
+}
+

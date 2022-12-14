@@ -1,56 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import './style.css';
+import { getTodos } from './firebase';
+import { showTodos, addOneTodo, cleanTodos } from './store/todoSlice';
+import TodoList from './components/TodoList';
 
 function App() {
+  const todos = useSelector(state=>state.todoReducer.todos);
+  const dispatch = useDispatch();
+  const [inputTodo, setInputTodo] = useState('');
+
+  useEffect(()=>{ getTodos().then(data=>dispatch(showTodos(data))).catch(er=>console.log(er)) }, []);
+
+  function addSingleTodo(){
+    if(!inputTodo) return;
+    dispatch(addOneTodo(inputTodo));
+    setInputTodo("");
+  }
+  function enterHandle(e){
+    return e.key=="Enter"? addSingleTodo() : null;
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
+    <div className="app">
+      <div className="addtodo">
+        <input className="inputTodo" autoFocus type="text" value={inputTodo} onChange={(e)=>setInputTodo(e.target.value)} onKeyDown={enterHandle}/>
+        <button onClick={addSingleTodo}>ADD</button>
+        <button onClick={()=>dispatch(cleanTodos())}>CLEAN LIST</button>
+      </div>
+      <div className="todos">
+        <TodoList todos={todos}/>
+      </div>
     </div>
   );
 }
